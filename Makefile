@@ -1,26 +1,5 @@
-name: Test workflow
-on: workflow_dispatch
-env:
-  OUTPUT_FILE: output.log
-  OUTPUT_NAME: output-log-file
-jobs:
-  upload-job:
-    name: Save output
-    runs-on: ubuntu-latest
-    steps:
-      - shell: bash
-        run: expr 3 + 1 > $OUTPUT_FILE
-      - name: Upload output file
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ env.OUTPUT_NAME }}
-          path: ${{ env.OUTPUT_FILE }}
-  download-job:
-    runs-on: ubuntu-latest
-    needs: upload-job
-    steps:
-      - name: Download a single artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.OUTPUT_NAME }}
-      - run: cat $OUTPUT_FILE
+all:
+	gcc test.c
+
+check:
+	./a.out
